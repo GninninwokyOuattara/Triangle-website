@@ -1,0 +1,25 @@
+{
+  "name": "triangle",
+  "version": "1.0.0",
+  "description": "crud project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GninninwokyOuattara/Triangle-website.git"
+  },
+  "author": "G",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GninninwokyOuattara/Triangle-website/issues"
+  },
+  "homepage": "https://github.com/GninninwokyOuattara/Triangle-website#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.0",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7"
+  }
+}
