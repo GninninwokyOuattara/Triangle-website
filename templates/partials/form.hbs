@@ -30,6 +30,16 @@
         </div>
     </div>
     <div class="control-group">
+        <label class="control-label" for="inputCourse">Formation</label>
+        <div class="controls">
+            <select>
+                {{#each optData}}
+                <option>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
         <div class="controls">
             <label class="checkbox">
                 <input type="checkbox"> Remember me
