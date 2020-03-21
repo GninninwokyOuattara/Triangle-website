@@ -1,38 +1,32 @@
-<form class="form-horizontal">
+<form class="form-horizontal" action="/sendsubform" method="POST">
     <div class="control-group">
         <label class="control-label" for="inputName">Nom</label>
         <div class="controls">
-            <input type="text" id="inputName" placeholder="Nom">
+            <input type="text" id="inputName" name="nuser" placeholder="Nom">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputSurname">Prenom</label>
         <div class="controls">
-            <input type="text" id="inputSurname" placeholder="Prenom">
+            <input type="text" id="inputSurname" name="puser" placeholder="Prenom">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputEmail">Email</label>
         <div class="controls">
-            <input type="text" id="inputEmail" placeholder="Email">
+            <input type="text" id="inputEmail" name="mailuser" placeholder="Email">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputTel">Téléphone</label>
         <div class="controls">
-            <input type="text" id="inpuTel" placeholder="Numéro de téléphone">
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputPassword">Password</label>
-        <div class="controls">
-            <input type="password" id="inputPassword" placeholder="Password">
+            <input type="text" id="inpuTel" name="teluser" placeholder="Numéro de téléphone">
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputCourse">Formation</label>
         <div class="controls">
-            <select>
+            <select name="course">
                 {{#each optData}}
                 <option>{{this}}</option>
                 {{/each}}
@@ -41,10 +35,7 @@
     </div>
     <div class="control-group">
         <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox"> Remember me
-            </label>
-            <button type="submit" class="btn">Sign in</button>
+            <button type="submit" class="btn">Valider</button>
         </div>
     </div>
 </form>
