@@ -44,25 +44,49 @@ app.get("/", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
+
 //sub page
 app.get("/subscription", (req, res) => {
   var opts = [];
-  q = "SELECT libcourse FROM triangle.course;";
+  q = "SELECT libCourse FROM triangle.courseTitle;";
   db.db.query(q, (err, results, field) => {
     if (err) throw err;
     for (let i = 0; i < results.length; i++) {
-      opts.push(results[i].libcourse);
+      opts.push(results[i].libCourse);
     }
     res.render("subscription", { optData: opts });
   });
 });
 
-app.post("/sendsubform", urlEncodedParser, (req, res) => {
-  console.log(req.body);
-  res.end();
+app.get("/insert", (req, res) => {
+  var name = "The wolf";
+  var surname = "The Surname";
+  //   q = `CALL insertUser("The name, "The surname, "The mail", "The phone", "The course")`;
+  q = `CALL simpleInsert("${name}")`;
+  db.db.query(q, true, (err, field, results) => {
+    if (err) throw err;
+    console.log("data inserted");
+  });
 });
 
-//comments here
+app.post("/sendsubform", urlEncodedParser, (req, res) => {
+  console.log(req.body);
+  // const { nameUser, surnameUser, mailUser, phoneUser, courseUser } = req.body;
+  let nameUser = req.body.nuser;
+  let surnameUser = req.body.puser;
+  let mailUser = req.body.mailuser;
+  let phoneUser = req.body.teluser;
+  let courseUser = req.body.course;
+
+  console.log(req.body);
+  q = `CALL insertUser("${nameUser}", "${surnameUser}", "${mailUser}", "${phoneUser}", "${courseUser}")`;
+  console.log(q);
+  db.db.query(q, true, (err, field, results) => {
+    if (err) throw err;
+    console.log("user inserted succesfully");
+  });
+  res.end();
+});
 
 app.get("*", (req, res) => {
   res.render("404", {
