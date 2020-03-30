@@ -4,9 +4,8 @@ const hbs = require("hbs");
 const bodyParser = require("body-parser");
 // const db = require("./utils/db");
 // const optionQuery = require("./utils/db");
-const db = require("./utils/db");
-
-// const mysql = require("mysql");
+const config = require("./utils/config");
+const mysql = require("mysql");
 
 const app = express();
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
@@ -15,6 +14,14 @@ const publicDirectoryPath = path.join(__dirname, "../public");
 const templatesPath = path.join(__dirname, "../templates");
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
+
+//Database connection
+const db = mysql.createConnection(config.config);
+console.log(config.config);
+db.connect(err => {
+  if (err) throw err;
+  console.log("Connected to Triangle database successfuly");
+});
 
 // query = "SELECT * FROM triangle.coach;";
 // db.db.query(query, (err, result, field) => {
