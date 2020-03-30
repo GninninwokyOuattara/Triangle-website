@@ -23,18 +23,6 @@ db.connect(err => {
   console.log("Connected to Triangle database successfuly");
 });
 
-// query = "SELECT * FROM triangle.coach;";
-// db.db.query(query, (err, result, field) => {
-//   if (err) throw err;
-//   console.log(result);
-// });
-
-// query = "SELECT libcourse FROM triangle.course;";
-// db.db.query(query, (err, result, field) => {
-//   if (err) throw err;
-//   data = result;
-// });
-
 app.set("view engine", "hbs");
 app.set("views", viewsPath);
 hbs.registerPartials(partialsPath);
@@ -56,7 +44,7 @@ app.get("/contact", (req, res) => {
 app.get("/subscription", (req, res) => {
   var opts = [];
   q = "SELECT libCourse FROM triangle.courseTitle;";
-  db.db.query(q, (err, results, field) => {
+  db.query(q, (err, results, field) => {
     if (err) throw err;
     for (let i = 0; i < results.length; i++) {
       opts.push(results[i].libCourse);
@@ -70,7 +58,7 @@ app.get("/insert", (req, res) => {
   var surname = "The Surname";
   //   q = `CALL insertUser("The name, "The surname, "The mail", "The phone", "The course")`;
   q = `CALL simpleInsert("${name}")`;
-  db.db.query(q, true, (err, field, results) => {
+  db.query(q, true, (err, field, results) => {
     if (err) throw err;
     console.log("data inserted");
   });
@@ -88,7 +76,7 @@ app.post("/sendsubform", urlEncodedParser, (req, res) => {
   console.log(req.body);
   q = `CALL insertUser("${nameUser}", "${surnameUser}", "${mailUser}", "${phoneUser}", "${courseUser}")`;
   console.log(q);
-  db.db.query(q, true, (err, field, results) => {
+  db.query(q, true, (err, field, results) => {
     if (err) throw err;
     console.log("user inserted succesfully");
   });
