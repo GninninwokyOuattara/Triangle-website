@@ -4,14 +4,8 @@ const hbs = require("hbs");
 const bodyParser = require("body-parser");
 // const db = require("./utils/db");
 // const optionQuery = require("./utils/db");
-<<<<<<< HEAD
-const db = require("./utils/db");
-
-// const mysql = require("mysql");
-=======
 const config = require("./utils/config");
 const mysql = require("mysql");
->>>>>>> test
 
 const app = express();
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
@@ -21,19 +15,6 @@ const templatesPath = path.join(__dirname, "../templates");
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
 
-<<<<<<< HEAD
-// query = "SELECT * FROM triangle.coach;";
-// db.db.query(query, (err, result, field) => {
-//   if (err) throw err;
-//   console.log(result);
-// });
-
-// query = "SELECT libcourse FROM triangle.course;";
-// db.db.query(query, (err, result, field) => {
-//   if (err) throw err;
-//   data = result;
-// });
-=======
 //Database connection
 const db = mysql.createConnection(config.config);
 console.log(config.config);
@@ -41,7 +22,6 @@ db.connect(err => {
   if (err) throw err;
   console.log("Connected to Triangle database successfuly");
 });
->>>>>>> test
 
 app.set("view engine", "hbs");
 app.set("views", viewsPath);
@@ -59,16 +39,6 @@ app.get("/", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
-<<<<<<< HEAD
-//sub page
-app.get("/subscription", (req, res) => {
-  var opts = [];
-  q = "SELECT libcourse FROM triangle.course;";
-  db.db.query(q, (err, results, field) => {
-    if (err) throw err;
-    for (let i = 0; i < results.length; i++) {
-      opts.push(results[i].libcourse);
-=======
 
 //sub page
 app.get("/subscription", (req, res) => {
@@ -78,16 +48,11 @@ app.get("/subscription", (req, res) => {
     if (err) throw err;
     for (let i = 0; i < results.length; i++) {
       opts.push(results[i].libCourse);
->>>>>>> test
     }
     res.render("subscription", { optData: opts });
   });
 });
 
-<<<<<<< HEAD
-app.post("/sendsubform", urlEncodedParser, (req, res) => {
-  console.log(req.body);
-=======
 app.get("/insert", (req, res) => {
   var name = "The wolf";
   var surname = "The Surname";
@@ -115,8 +80,16 @@ app.post("/sendsubform", urlEncodedParser, (req, res) => {
     if (err) throw err;
     console.log("user inserted succesfully");
   });
->>>>>>> test
   res.end();
+});
+
+//loading users data
+app.get("/load", (req, res) => {
+  q = `SELECT * FROM user`;
+  db.query(q, (err, field, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
 });
 
 app.get("*", (req, res) => {
