@@ -74,7 +74,7 @@ app.post("/sendsubform", urlEncodedParser, (req, res) => {
   let courseUser = req.body.course;
 
   console.log(req.body);
-  q = `CALL insertUser("${nameUser}", "${surnameUser}", "${mailUser}", "${phoneUser}", "${courseUser}")`;
+  q = `CALL UserCourseInsertion("${nameUser}", "${surnameUser}", "${mailUser}", "${phoneUser}", "${courseUser}")`;
   console.log(q);
   db.query(q, true, (err, field, results) => {
     if (err) throw err;
@@ -88,7 +88,7 @@ app.get("/load", (req, res) => {
   q = `SELECT * FROM user`;
   db.query(q, (err, field, results) => {
     if (err) throw err;
-    res.send(results);
+    res.send(field);
   });
 });
 
