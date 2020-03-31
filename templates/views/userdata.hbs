@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Mail</th>
+            <th>Contact</th>
+            <th>Formation</th>
+        </tr>
+        {{#each data}}
+        <tr>
+            <td>{{this.idUser}}</td>
+            <td>{{this.nameUser}}</td>
+            <td>{{this.surnameUser}}</td>
+            <td>{{this.mailUser}}</td>
+            <td>{{this.phoneUser}}</td>
+            <td>{{this.titleCourse}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</body>
+
+</html>

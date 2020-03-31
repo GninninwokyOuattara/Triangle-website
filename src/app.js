@@ -11,9 +11,14 @@ const app = express();
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
 const port = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, "../public");
+console.log(publicDirectoryPath);
 const templatesPath = path.join(__dirname, "../templates");
 const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
+const utilsPath = path.join(__dirname, "../src/utils");
+console.log(utilsPath);
+console.log(viewsPath);
+console.log(partialsPath);
 
 //Database connection
 const db = mysql.createConnection(config.config);
@@ -49,7 +54,10 @@ app.get("/subscription", (req, res) => {
     for (let i = 0; i < results.length; i++) {
       opts.push(results[i].libCourse);
     }
+    let datai = { d: opts };
+    console.log(datai);
     res.render("subscription", { optData: opts });
+    // console.log(optData);
   });
 });
 
@@ -83,12 +91,26 @@ app.post("/sendsubform", urlEncodedParser, (req, res) => {
   res.end();
 });
 
-//loading users data
+//loading users data raw
 app.get("/load", (req, res) => {
   q = `SELECT * FROM user`;
   db.query(q, (err, field, results) => {
     if (err) throw err;
     res.send(field);
+  });
+});
+
+//user data displayed into html table
+app.get("/userdata", (req, res) => {
+  q = `SELECT idUser, nameUser, surnameUser, mailUser, phoneUser, titleCourse 
+FROM course_has_user as chu
+INNER JOIN user as u
+	ON chu.user_idUser = u.idUser
+INNER JOIN course as c
+    ON chu.course_idCourse = c.idCourse;`;
+  console.log("printing results");
+  db.query(q, (err, results, field) => {
+    res.render("userdata", { data: results });
   });
 });
 
